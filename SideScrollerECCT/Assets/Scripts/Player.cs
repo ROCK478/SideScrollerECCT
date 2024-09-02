@@ -1,0 +1,77 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMove : MonoBehaviour
+{
+    [Header("Настройки передвижения")]
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _jumpForce;
+    private bool _lookRight = true;
+    private Rigidbody2D _rb;
+
+
+    [Header("Настройки стрельбы")]
+    [SerializeField] private GameObject _bulletPrephab;
+    [SerializeField] private float _bulletSpeed;
+    [SerializeField] private float _timeLifeBullet;
+    private Transform _firePoint;
+
+
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _firePoint = GameObject.Find("FirePoint").transform;
+    }
+    private void Update()
+    {
+        Flip();
+        Jump();
+        Shoot();
+    }
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    private void Move()
+    {
+        _rb.velocity = new Vector2(Input.GetAxis("Horizontal"), _rb.velocity.y) * _moveSpeed;
+    }
+
+    private void Flip()
+    {
+        if ((_lookRight && (Input.GetAxis("Horizontal") < 0)) || (!_lookRight && (Input.GetAxis("Horizontal") > 0)))
+        {
+            transform.localScale *= -1;
+            _lookRight = !_lookRight;
+        }
+    }
+
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _rb.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
+        }
+    }
+
+    private void Shoot()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            GameObject Bullet = Instantiate(_bulletPrephab, _firePoint.position, _firePoint.rotation);
+            Rigidbody2D BulletRB = Bullet.GetComponent<Rigidbody2D>();
+            if (_lookRight)
+            {
+                BulletRB.velocity = new Vector2(_bulletSpeed, 0);
+            }
+            else
+            {
+                BulletRB.velocity = new Vector2(_bulletSpeed * -1, 0);
+            }
+            Destroy(Bullet, _timeLifeBullet);
+        }
+    }
+}
