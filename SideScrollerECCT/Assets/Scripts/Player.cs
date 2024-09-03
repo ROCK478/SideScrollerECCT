@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _jumpForce;
     private bool _lookRight = true;
     private Rigidbody2D _rb;
+    private SpriteRenderer _sr;
 
 
     [Header("Настройки стрельбы")]
@@ -21,6 +22,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
+        _sr = GetComponent<SpriteRenderer>();
         _rb = GetComponent<Rigidbody2D>();
         _firePoint = GameObject.Find("FirePoint").transform;
     }
@@ -44,7 +46,8 @@ public class PlayerMove : MonoBehaviour
     {
         if ((_lookRight && (Input.GetAxis("Horizontal") < 0)) || (!_lookRight && (Input.GetAxis("Horizontal") > 0)))
         {
-            transform.localScale *= -1;
+            gameObject.
+            transform.localScale *= new Vector2(-1, 1);
             _lookRight = !_lookRight;
         }
     }
