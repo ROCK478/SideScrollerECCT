@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _jumpForce;
     private bool _lookRight = true;
     private Rigidbody2D _rb;
-    private SpriteRenderer _sr;
+    private Animator _animator;
 
 
     [Header("Настройки стрельбы")]
@@ -22,7 +23,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
-        _sr = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _firePoint = GameObject.Find("FirePoint").transform;
     }
@@ -31,6 +32,8 @@ public class PlayerMove : MonoBehaviour
         Flip();
         Jump();
         Shoot();
+
+        _animator.SetFloat("xVelocity", Math.Abs(_rb.velocity.x));
     }
     private void FixedUpdate()
     {
