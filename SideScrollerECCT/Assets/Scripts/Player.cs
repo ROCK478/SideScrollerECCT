@@ -7,7 +7,6 @@ public class PlayerMove : MonoBehaviour
 {
     [Header("Настройки передвижения")]
     [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _jumpForce;
     private bool _lookRight = true;
     private Rigidbody2D _rb;
     private Animator _animator;
@@ -30,7 +29,6 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
         Flip();
-        Jump();
         Shoot();
 
         _animator.SetFloat("xVelocity", Math.Abs(_rb.velocity.x));
@@ -52,14 +50,6 @@ public class PlayerMove : MonoBehaviour
             gameObject.
             transform.localScale *= new Vector2(-1, 1);
             _lookRight = !_lookRight;
-        }
-    }
-
-    private void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _rb.AddForce(new Vector2(0, _jumpForce), ForceMode2D.Impulse);
         }
     }
 
