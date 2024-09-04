@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UIElements;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class PlayerMove : MonoBehaviour
     private bool _lookRight = true;
     private Rigidbody2D _rb;
     private Animator _animator;
+
+    [Header("Настройки прыжка")]
+    [SerializeField] private float _jumpForce;
+    private bool _isGround;
+    [SerializeField] private float _rayDistance = 0.6f; //Расстояние для поиска земли для недоступности множественных прыжков
 
 
     [Header("Настройки стрельбы")]
@@ -30,6 +36,8 @@ public class PlayerMove : MonoBehaviour
     {
         Flip();
         Shoot();
+        Jump();
+        
 
         _animator.SetFloat("xVelocity", Math.Abs(_rb.velocity.x));
     }
@@ -40,7 +48,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
-        _rb.velocity = new Vector2(Input.GetAxis("Horizontal"), _rb.velocity.y) * _moveSpeed;
+        _rb.velocity = (new Vector2(Input.GetAxis("Horizontal") * _moveSpeed, _rb.velocity.y));
     }
 
     private void Flip()
@@ -68,6 +76,25 @@ public class PlayerMove : MonoBehaviour
                 BulletRB.velocity = new Vector2(_bulletSpeed * -1, 0);
             }
             Destroy(Bullet, _timeLifeBullet);
+        }
+    }
+
+    private void Jump()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(_rb.position, Vector2.down, _rayDistance, LayerMask.GetMask("Ground")); //У объектов нужно указать слой "Ground"
+        if (hit.collider != null)
+        {
+            _isGround = true;
+        }
+        else
+        {
+            _isGround = false;
+            _animator.SetBool("isJump", false);
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && _isGround)
+        {
+            _rb.AddForce(Vector2.up.normalized * _jumpForce, ForceMode2D.Impulse);
+            _animator.SetBool("isJump", _isGround);
         }
     }
 }

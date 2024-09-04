@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ParallaxEffect : MonoBehaviour
 {
-    [SerializeField, Range(0f, 1f)] private float _parallaxStrength; //„ем глубже эффект от камеры, тем больше значение —илыѕараллакса
+    [SerializeField, Range(0f, 1f)] private float _parallaxStrength; //„ем глубже объект от камеры, тем больше значение —илыѕараллакса
+    [SerializeField] private bool _disableVerticalParallax = true; //≈сли true, то фоновый объект при прыжке двигатьс€ не будет
     private Vector3 _targetPreviousPosition;
     private Transform _followingTarget;
+
 
     private void Start()
     {
@@ -20,7 +22,10 @@ public class ParallaxEffect : MonoBehaviour
     private void Update()
     {
         var delta = _followingTarget.position - _targetPreviousPosition;
-        delta.y = 0;
+        if (_disableVerticalParallax)
+        {
+            delta.y = 0;
+        }
 
         _targetPreviousPosition = _followingTarget.position;
         transform.position += delta * _parallaxStrength;
