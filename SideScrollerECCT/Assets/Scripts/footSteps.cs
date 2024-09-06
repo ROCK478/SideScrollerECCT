@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class footSteps : MonoBehaviour
 {
     public AudioClip[] ftStepsAudio = new AudioClip[5];
     public AudioSource playerAudio;
-
-    private int numAudion = 0;
+    
 
     private void Awake()
     {
@@ -15,10 +15,11 @@ public class footSteps : MonoBehaviour
     }
 
     private void footStepsAudio()
-    {
-        playerAudio.PlayOneShot(ftStepsAudio[numAudion]);
-        numAudion++;
-
-        if (numAudion >= ftStepsAudio.Length) { numAudion = 0; }
+    {   
+        if (gameObject.GetComponent<PlayerMove>()._isGround)
+        {
+            System.Random rnd = new System.Random();
+            playerAudio.PlayOneShot(ftStepsAudio[rnd.Next(0, 5)]);
+        }
     }    
 }

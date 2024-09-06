@@ -16,7 +16,7 @@ public class PlayerMove : MonoBehaviour
 
     [Header("Настройки прыжка")]
     [SerializeField] private float _jumpForce;
-    private bool _isGround;
+    public bool _isGround;
     [SerializeField] private float _rayDistance = 0.6f; //Расстояние для поиска земли для недоступности множественных прыжков
 
 

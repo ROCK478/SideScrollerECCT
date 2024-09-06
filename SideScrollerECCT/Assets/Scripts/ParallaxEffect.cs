@@ -9,7 +9,6 @@ public class ParallaxEffect : MonoBehaviour
     private Vector3 _targetPreviousPosition;
     private Transform _followingTarget;
 
-
     private void Start()
     {
         if (_followingTarget == null)

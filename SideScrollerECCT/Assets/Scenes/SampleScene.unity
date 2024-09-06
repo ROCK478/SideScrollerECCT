@@ -704,9 +704,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0024d788184ef484e836823a49fe18a3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 945d9180420518c41ad15a347a5f2fd5, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -803,11 +803,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ftStepsAudio:
-  - {fileID: 8300000, guid: 0024d788184ef484e836823a49fe18a3, type: 3}
-  - {fileID: 8300000, guid: 0024d788184ef484e836823a49fe18a3, type: 3}
-  - {fileID: 8300000, guid: 0024d788184ef484e836823a49fe18a3, type: 3}
-  - {fileID: 8300000, guid: 0024d788184ef484e836823a49fe18a3, type: 3}
-  - {fileID: 8300000, guid: 0024d788184ef484e836823a49fe18a3, type: 3}
+  - {fileID: 8300000, guid: 2d4e2c1cc2207b2449715d33c978c844, type: 3}
+  - {fileID: 8300000, guid: 2a63aa808f5a8d742a4c17d035c020f7, type: 3}
+  - {fileID: 8300000, guid: caea1b1839f374047ba1205d66d54cf6, type: 3}
+  - {fileID: 8300000, guid: 43c8703c790b2184c9b49aee3227eadf, type: 3}
+  - {fileID: 8300000, guid: 4576332981a9bdb479ef9468f1d486bd, type: 3}
   playerAudio: {fileID: 704048576}
 --- !u!114 &704048579
 MonoBehaviour:
@@ -823,6 +823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 3
   _jumpForce: 6
+  _isGround: 0
   _rayDistance: 0.7
   _bulletPrephab: {fileID: 546052874556364969, guid: c83541fb056e7994bad4e32a469d38c0, type: 3}
   _bulletSpeed: 10
