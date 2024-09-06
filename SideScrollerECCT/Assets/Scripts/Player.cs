@@ -74,7 +74,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
             GameObject Bullet = Instantiate(_bulletPrephab, _firePoint.position, _firePoint.rotation);
             Rigidbody2D BulletRB = Bullet.GetComponent<Rigidbody2D>();
