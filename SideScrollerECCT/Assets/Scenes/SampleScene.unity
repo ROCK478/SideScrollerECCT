@@ -827,6 +827,7 @@ MonoBehaviour:
   _bulletPrephab: {fileID: 546052874556364969, guid: c83541fb056e7994bad4e32a469d38c0, type: 3}
   _bulletSpeed: 10
   _timeLifeBullet: 1
+  _maxHealth: 100
 --- !u!70 &704048580
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

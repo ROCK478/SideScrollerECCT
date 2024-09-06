@@ -1,0 +1,35 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Enemy : MonoBehaviour
+{
+    private float _maxHealth;
+    private float _currentHealth;
+    public bool IsDetected = false;
+    private Rigidbody2D _rb;
+    private Transform _player;
+    [SerializeField] private float _rayDistance; //Расстояние для поиска игрока
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+    private void Start()
+    {
+        _maxHealth = 100;
+        _currentHealth = _maxHealth;
+    }
+
+
+    public void TakeDamage(int damage) // Получение урона
+    {
+        _currentHealth -= damage;
+
+        if (_currentHealth <= 0)
+        {
+            Destroy(this.gameObject);
+        };
+    }
+}

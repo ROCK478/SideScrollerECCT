@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
+using Unity.Burst.CompilerServices;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -23,6 +25,11 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _bulletSpeed;
     [SerializeField] private float _timeLifeBullet;
     private Transform _firePoint;
+    private int _damage = 20;
+
+    [Header("Настройки здоровья")]
+    [SerializeField] private int _maxHealth = 100;
+    private int _currentHealth;
 
 
 
@@ -31,6 +38,10 @@ public class PlayerMove : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _firePoint = GameObject.Find("FirePoint").transform;
+    }
+    private void Start()
+    {
+        _currentHealth = _maxHealth;
     }
     private void Update()
     {
@@ -67,6 +78,7 @@ public class PlayerMove : MonoBehaviour
         {
             GameObject Bullet = Instantiate(_bulletPrephab, _firePoint.position, _firePoint.rotation);
             Rigidbody2D BulletRB = Bullet.GetComponent<Rigidbody2D>();
+            CircleCollider2D BulletCollider = Bullet.GetComponent<CircleCollider2D>();
             if (_lookRight)
             {
                 BulletRB.velocity = new Vector2(_bulletSpeed, 0);
@@ -95,6 +107,15 @@ public class PlayerMove : MonoBehaviour
         {
             _rb.AddForce(Vector2.up.normalized * _jumpForce, ForceMode2D.Impulse);
             _animator.SetBool("isJump", _isGround);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _currentHealth -= damage;
+        if (_currentHealth <= 0)
+        {
+            SceneManager.LoadScene("SampleScene");
         }
     }
 }
