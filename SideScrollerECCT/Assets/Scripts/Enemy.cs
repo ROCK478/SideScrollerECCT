@@ -15,17 +15,16 @@ public class Enemy : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
-    private void Start()
-    {
         _maxHealth = 100;
         _currentHealth = _maxHealth;
     }
 
 
+
     public void TakeDamage(int damage) // Получение урона
     {
         _currentHealth -= damage;
+        Debug.Log(_currentHealth);
 
         if (_currentHealth <= 0)
         {

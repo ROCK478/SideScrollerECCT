@@ -74,11 +74,13 @@ public class PlayerMove : MonoBehaviour
 
     private void Shoot()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             GameObject Bullet = Instantiate(_bulletPrephab, _firePoint.position, _firePoint.rotation);
             Rigidbody2D BulletRB = Bullet.GetComponent<Rigidbody2D>();
-            CircleCollider2D BulletCollider = Bullet.GetComponent<CircleCollider2D>();
+            Bullet.AddComponent<Bullet>();
+            Bullet BulletScrpipt = Bullet.GetComponent<Bullet>();
+            BulletScrpipt.BulletDamage = _damage;
             if (_lookRight)
             {
                 BulletRB.velocity = new Vector2(_bulletSpeed, 0);

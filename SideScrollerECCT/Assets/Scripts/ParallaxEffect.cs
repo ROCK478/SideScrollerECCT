@@ -6,6 +6,7 @@ public class ParallaxEffect : MonoBehaviour
 {
     [SerializeField, Range(0f, 1f)] private float _parallaxStrength; //Чем глубже объект от камеры, тем больше значение СилыПараллакса
     [SerializeField] private bool _disableVerticalParallax = true; //Если true, то фоновый объект при прыжке двигаться не будет
+    [SerializeField] private bool _moveRight = true; //Элементы фона будут двигаться за персонажем. Если false, то в противоположную сторону
     private Vector3 _targetPreviousPosition;
     private Transform _followingTarget;
 
@@ -27,6 +28,13 @@ public class ParallaxEffect : MonoBehaviour
         }
 
         _targetPreviousPosition = _followingTarget.position;
-        transform.position += delta * _parallaxStrength;
+        if (_moveRight)
+        {
+            transform.position += delta * _parallaxStrength;
+        }
+        else
+        {
+            transform.position -= delta * _parallaxStrength;
+        }
     }
 }
