@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using Unity.Burst.CompilerServices;
 
-public class PlayerMove : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [Header("Настройки передвижения")]
     [SerializeField] private float _moveSpeed;

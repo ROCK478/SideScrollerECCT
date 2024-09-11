@@ -16,7 +16,7 @@ public class footSteps : MonoBehaviour
 
     private void footStepsAudio()
     {
-        if (gameObject.GetComponent<PlayerMove>()._isGround && Input.GetAxis("Horizontal") != 0)
+        if (gameObject.GetComponent<Player>()._isGround && Input.GetAxis("Horizontal") != 0)
         {
             System.Random rnd = new System.Random();
             playerAudio.PlayOneShot(ftStepsAudio[rnd.Next(0, 5)]);
